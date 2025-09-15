@@ -1,0 +1,11 @@
+const express = require('express');
+const router = express.Router();
+const usersController = require('../controllers/usersController');
+const { validateUserCreation, validateUserUpdate } = require('../utils/validators');
+const validateRequest = require('../middleware/validateRequest');
+router.get('/', usersController.getAllUsers);
+router.get('/:id', usersController.getUserById);
+router.post('/', validateUserCreation, validateRequest, usersController.createUser);
+router.put('/:id', validateUserUpdate, validateRequest, usersController.updateUser);
+router.delete('/:id', usersController.deleteUser);
+module.exports = router;
